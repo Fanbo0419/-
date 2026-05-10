@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>隐私政策 & 用户协议 - AUV 您吃了么</title>
+    <style>
+        :root {
+            /* 浅色模式 */
+            --bg: #F5F5F7;
+            --surface: #FFFFFF;
+            --nav-bg: #FFFFFF;
+            --divider: #E8E8EA;
+            --text-primary: #1A1A1F;
+            --text-body: #3C3C43;
+            --text-caption: #8E8E93;
+            --brand-color: #E74C3C;
+            --agreement-accent: #2563EB;
+            --doc-accent: var(--brand-color);
+            --doc-accent-light: #FFF0F1;
+            --safe-top: 24px;
+            --scrollbar-thumb: #C8C8CC;
+            --scrollbar-track: transparent;
+            --shadow-banner: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --page-enter-offset: 40px;
+            --page-enter-opacity: 0;
+        }
+
+        /* 深色模式 */
+        :root.dark {
+            --bg: #1A1A1F;
+            --surface: #1E1E24;
+            --nav-bg: #1E1E24;
+            --divider: #2A2A2F;
+            --text-primary: #E0E0E5;
+            --text-body: #A0A0A5;
+            --text-caption: #6B6B70;
+            --scrollbar-thumb: #3A3A40;
+            --scrollbar-track: #1A1A1F;
+            --shadow-banner: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 协议类型下的 accent 色覆盖 */
+        :root.doc-agreement {
+            --doc-accent: #2563EB;
+            --doc-accent-light: #EFF6FF;
+        }
+        :root.doc-agreement.dark {
+            --doc-accent: #2563EB;
+            --doc-accent-light: #1A2A4A;
+        }
+        :root.doc-privacy {
+            --doc-accent: #E74C3C;
+            --doc-accent-light: #FFF0F1;
+        }
+        :root.doc-privacy.dark {
+            --doc-accent: #E74C3C;
+            --doc-accent-light: #2A1215;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            transition: background-color 0.35s ease, color 0.35s ease;
+            /* 页面进入动画 */
+            animation: pageSlideIn 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            /* 支持安全区域 */
+            padding-top: env(safe-area-inset-top, 0px);
+        }
+
+        /* 页面滑入动画 */
+        @keyframes pageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(36px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 文档切换时的脉冲动画 */
+        @keyframes contentPulse {
+            0% {
+                opacity: 0.45;
+                transform: translateY(6px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .content-pulse {
+            animation: contentPulse 0.28s ease-out forwards;
+        }
+
+        /* 主容器 */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            max-width: 560px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        /* ─── 导航栏 ─────────────────────── */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: calc(var(--safe-top) + 44px);
+            padding-top: var(--safe-top);
+            padding-left: 4px;
+            padding-right: 4px;
+            background-color: var(--nav-bg);
+            border-bottom: 0.5px solid var(--divider);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+            /* 顶部安全区域已由body的padding-top处理，这里再微调 */
+            margin-top: calc(env(safe-area-inset-top, 0px) * -1);
+            padding-top: calc(var(--safe-top) + env(safe-area-inset-top, 0px));
+        }
+        /* 在body已有padding-top的情况下，nav-bar的sticky需要调整 */
+        body {
+            padding-top: 0;
+        }
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: calc(env(safe-area-inset-top, 24px) + 44px);
+            padding-top: env(safe-area-inset-top, 24px);
+            padding-left: 4px;
+            padding-right: 4px;
+            background-color: var(--nav-bg);
+            border-bottom: 0.5px solid var(--divider);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+
+        .nav-back-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 10px;
+            flex-shrink: 0;
+            transition: background-color 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 20px;
+            line-height: 1;
+        }
+        .nav-back-btn:hover {
+            background-color: rgba(128, 128, 128, 0.1);
+        }
+        .nav-back-btn:active {
+            background-color: rgba(128, 128, 128, 0.18);
+            transform: scale(0.94);
+            transition: transform 0.1s ease;
+        }
+        .nav-back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-primary);
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.35s ease;
+        }
+
+        .nav-title {
+            flex: 1;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: color 0.35s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-spacer {
+            width: 44px;
+            flex-shrink: 0;
+        }
+
+        /* ─── 滚动区域 ──────────────────── */
+        .scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            scroll-behavior: smooth;
+        }
+        .scroll-area::-webkit-scrollbar {
+            width: 4px;
+        }
+        .scroll-area::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        .scroll-area::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+        .scroll-area {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        }
+
+        .scroll-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* ─── Banner ────────────────────── */
+        .doc-banner-wrapper {
+            width: 100%;
+            background-color: var(--surface);
+            transition: background-color 0.35s ease;
+            box-shadow: var(--shadow-banner);
+        }
+        .doc-banner {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 24px 24px 22px;
+            width: 100%;
+        }
+        .banner-header-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+        }
+        .banner-icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background-color: var(--doc-accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background-color 0.4s ease;
+        }
+        .banner-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+        .banner-title-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+        }
+        .banner-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: color 0.35s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .banner-date {
+            font-size: 12px;
+            color: var(--text-caption);
+            transition: color 0.35s ease;
+        }
+        .banner-subtitle {
+            font-size: 13px;
+            color: var(--text-caption);
+            line-height: 21px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            transition: color 0.35s ease;
+        }
+        .banner-divider {
+            width: 100%;
+            height: 0.5px;
+            background-color: var(--divider);
+            transition: background-color 0.35s ease;
+            border: none;
+        }
+
+        /* ─── 条款列表容器 ─────────────── */
+        .sections-container {
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            background-color: var(--surface);
+            border-radius: 0;
+            transition: background-color 0.35s ease;
+            box-shadow: var(--shadow-banner);
+        }
+
+        /* ─── 单条条款 ────────────────── */
+        .section-item {
+            width: 100%;
+            background-color: var(--surface);
+            transition: background-color 0.35s ease;
+        }
+        .section-inner {
+            padding: 20px 24px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .section-heading-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .section-accent-bar {
+            width: 3px;
+            height: 17px;
+            background-color: var(--doc-accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+            transition: background-color 0.4s ease;
+        }
+        .section-heading {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            flex: 1;
+            transition: color 0.35s ease;
+        }
+        .section-body {
+            font-size: 14px;
+            color: var(--text-body);
+            line-height: 26px;
+            white-space: pre-line;
+            width: 100%;
+            transition: color 0.35s ease;
+        }
+        .section-divider {
+            width: calc(100% - 24px);
+            margin-left: 24px;
+            height: 0.5px;
+            background-color: var(--divider);
+            border: none;
+            transition: background-color 0.35s ease;
+        }
+        .section-item:last-child .section-divider {
+            display: none;
+        }
+
+        /* ─── 页脚 ────────────────────── */
+        .doc-footer {
+            width: 100%;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 24px 48px;
+            transition: background-color 0.35s ease;
+        }
+        .footer-divider {
+            width: 100%;
+            height: 0.5px;
+            background-color: var(--divider);
+            border: none;
+            transition: background-color 0.35s ease;
+        }
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-caption);
+            text-align: center;
+            width: 100%;
+            padding-top: 4px;
+            transition: color 0.35s ease;
+        }
+        .footer-switch-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--doc-accent);
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.35s ease, opacity 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+            border: none;
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 14px;
+        }
+        .footer-switch-link:hover {
+            opacity: 0.75;
+        }
+        .footer-switch-link:active {
+            opacity: 0.5;
+            transform: scale(0.96);
+        }
+
+        /* ─── 主题切换浮动按钮 ──────────── */
+        .theme-toggle {
+            position: fixed;
+            bottom: 28px;
+            right: 20px;
+            z-index: 200;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: var(--surface);
+            border: 0.5px solid var(--divider);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+            transition: all 0.35s ease;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        .theme-toggle:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+            transform: translateY(-2px);
+        }
+        .theme-toggle:active {
+            transform: scale(0.9);
+            transition: transform 0.12s ease;
+        }
+        @media (min-width: 600px) {
+            .theme-toggle {
+                right: calc(50% - 280px + 20px);
+            }
+        }
+
+        /* ─── 响应式微调 ────────────────── */
+        @media (max-width: 380px) {
+            .banner-title {
+                font-size: 22px;
+            }
+            .banner-icon-box {
+                width: 46px;
+                height: 46px;
+                border-radius: 12px;
+            }
+            .banner-icon {
+                font-size: 24px;
+            }
+            .section-inner {
+                padding: 16px 16px 18px;
+            }
+            .section-divider {
+                width: calc(100% - 16px);
+                margin-left: 16px;
+            }
+            .doc-banner {
+                padding: 20px 16px 18px;
+            }
+            .doc-footer {
+                padding: 14px 16px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="appContainer">
+        <!-- 导航栏 -->
+        <nav class="nav-bar" id="navBar">
+            <button class="nav-back-btn" id="navBackBtn" aria-label="返回" title="返回">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="15,4 7,12 15,20" />
+                </svg>
+            </button>
+            <span class="nav-title" id="navTitle">隐私政策</span>
+            <span class="nav-spacer"></span>
+        </nav>
+
+        <!-- 滚动区域 -->
+        <main class="scroll-area" id="scrollArea">
+            <div class="scroll-content" id="scrollContent">
+                <!-- Banner 区域 -->
+                <div class="doc-banner-wrapper" id="docBannerWrapper">
+                    <div class="doc-banner" id="docBanner">
+                        <div class="banner-header-row">
+                            <div class="banner-icon-box" id="bannerIconBox">
+                                <span class="banner-icon" id="bannerIcon">🛡️</span>
+                            </div>
+                            <div class="banner-title-group">
+                                <h1 class="banner-title" id="bannerTitle">隐私政策</h1>
+                                <span class="banner-date" id="bannerDate">版本 1.0.0 · 生效日期：2026 年 4 月 19 日</span>
+                            </div>
+                        </div>
+                        <p class="banner-subtitle" id="bannerSubtitle">《AUV 您吃了么》由孟晓菡开发。我们依据《个人信息保护法》《网络安全法》制定本政策，请在使用前仔细阅读。</p>
+                    </div>
+                    <hr class="banner-divider">
+                </div>
+
+                <!-- 条款列表 -->
+                <div class="sections-container" id="sectionsContainer">
+                    <!-- 动态填充 -->
+                </div>
+
+                <!-- 页脚 -->
+                <footer class="doc-footer" id="docFooter">
+                    <hr class="footer-divider">
+                    <span class="footer-text" id="footerText">© 2026 孟晓菡 保留所有权利</span>
+                    <button class="footer-switch-link" id="footerSwitchLink" title="切换查看另一份文档">
+                        查看用户协议 →
+                    </button>
+                </footer>
+            </div>
+        </main>
+
+        <!-- 主题切换按钮 -->
+        <button class="theme-toggle" id="themeToggle" aria-label="切换深色/浅色模式" title="切换深色/浅色模式">
+            🌓
+        </button>
+    </div>
+
+    <script>
+        (function() {
+            // ─── 数据结构 ──────────────────────────────────────────────
+            const PRIVACY_DOC = {
+                type: 'privacy',
+                icon: '🛡️',
+                title: '隐私政策',
+                subtitle: '《AUV 您吃了么》由孟晓菡开发。我们依据《个人信息保护法》《网络安全法》制定本政策，请在使用前仔细阅读。',
+                effectiveDate: '版本 1.0.0 · 生效日期：2026 年 4 月 19 日',
+                sections: [
+                    { heading: '📌 开发者信息', body: '孟晓菡' },
+                    {
+                        heading: '一、我们收集的信息',
+                        body: '本应用仅在设备本地处理数据，不向任何服务器上传个人身份信息。\n\n【本地自动生成的数据】\n• 您选择的食材与厨具偏好\n• 浏览过的菜谱历史记录（最近 50 条）\n• 您收藏的菜谱 ID 列表（最多 500 条）\n• 昵称、头像等个人资料（存储于设备沙箱）\n\n【相册权限】仅在您主动选择头像图片时读取，读取后立即复制至沙箱，不保留原始路径。'
+                    },
+                    {
+                        heading: '二、信息的使用目的',
+                        body: '我们收集上述信息的唯一目的是提升您的菜谱使用体验：\n\n• 根据冰箱食材精准匹配可做菜谱\n• 记录浏览历史，方便您重温感兴趣的菜谱\n• 保存收藏列表，快速定位心仪食谱\n• 恢复上次的搜索模式（严格 / 模糊 / 生存）设置\n\n我们不使用任何信息进行广告投放、用户画像或跨应用追踪。'
+                    },
+                    {
+                        heading: '三、信息的存储与保护',
+                        body: '全部数据均存储于您的设备本地：\n\n• 用户偏好设置使用 HarmonyOS Preferences 存储\n• 菜谱源数据以只读方式内嵌于安装包 rawfile 目录\n• 头像图片复制至应用沙箱 filesDir，随应用卸载自动删除\n\n我们没有自有服务器，数据不经过任何网络传输。'
+                    },
+                    {
+                        heading: '四、权限使用说明',
+                        body: '本应用申请以下设备权限，每项均有明确用途且需您主动授权：\n\n【READ_IMAGEVIDEO / WRITE_IMAGEVIDEO】\n用于从相册选取头像图片，不读取其他媒体文件，不上传。\n\n【RUNNING_LOCK】\n防止在查看烹饪步骤时屏幕意外熄灭，仅在视频播放页生效。\n\n您可随时在系统设置 → 应用管理 → AUV您吃了么 → 权限 中撤回授权。'
+                    },
+                    {
+                        heading: '五、未成年人保护',
+                        body: '本应用面向 14 周岁及以上用户。如您为未成年人，请在监护人陪同下使用。我们不主动收集未成年人个人信息；若监护人发现未成年人在未告知的情况下提供了相关信息，请联系我们予以删除。'
+                    },
+                    {
+                        heading: '六、您的权利',
+                        body: '依据《个人信息保护法》，您对本地数据享有以下权利：\n\n【查阅】在"餐桌"页可查看收藏数量和浏览记录条数。\n【删除】在设置页关闭"保留本地数据"，应用将立即清除全部个人记录与收藏。\n【修改】可随时更改昵称与头像。\n【撤回】可在系统权限管理中撤回相册读写权限。\n\n如需行使其他权利，请通过下方联系方式与我们沟通。'
+                    },
+                    {
+                        heading: '七、第三方内容',
+                        body: '本应用中的视频链接跳转至哔哩哔哩（Bilibili）等外部平台。跳转后您将受该平台隐私政策约束，本应用不对第三方平台的数据处理行为负责。'
+                    },
+                    {
+                        heading: '八、政策变更',
+                        body: '如本政策发生实质性变更，我们将在应用内通过弹窗等显著方式重新获得您的明确同意。对于不影响用户重大权益的非实质性变更（如文本优化），我们会在应用更新时同步。您继续使用本应用视为接受更新后的政策。'
+                    },
+                    {
+                        heading: '九、联系我们',
+                        body: '孟晓菡 \n\n• GitHub Issues：https://github.com/Ruheluobixieqing/Cook.git'
+                    }
+                ],
+                footer: '© 2026 孟晓菡 保留所有权利'
+            };
+
+            const AGREEMENT_DOC = {
+                type: 'agreement',
+                icon: '📋',
+                title: '用户协议',
+                subtitle: '本协议（以下简称"协议"）是您（"用户"）与 孟晓菡（"我们"）之间就使用《AUV 您吃了么》软件及相关服务所订立的法律文件，具有合同效力。',
+                effectiveDate: '版本 1.0.0 · 生效日期：2026 年 4 月 19 日',
+                sections: [
+                    {
+                        heading: '一、协议的接受与生效',
+                        body: '当您勾选"我已阅读并同意"复选框并点击"同意并开始使用"时，即表示您已完整阅读、理解并接受本协议的全部条款和条件。\n\n若您不同意本协议任何内容，请立即停止使用本应用。未成年人须在法定监护人监督下阅读并由其代为同意本协议。'
+                    },
+                    {
+                        heading: '二、服务内容与范围',
+                        body: '《AUV 您吃了么》为您提供以下本地化服务：\n\n【菜谱检索】按食材和厨具多维度智能匹配可做菜谱，支持严格、模糊、生存三种搜索模式。\n【菜谱库浏览】全量菜谱分类展示、标签筛选与全文关键词搜索。\n【随机发现】基于本地菜谱数据库随机推荐含视频教程的菜品。\n【个人中心】收藏夹管理、浏览历史追踪、个人资料自定义。\n\n上述功能以"现状"提供，我们保留在不另行通知的情况下调整服务内容的权利。'
+                    },
+                    {
+                        heading: '三、账号与设备',
+                        body: '本应用无需注册账号，所有个人数据（收藏列表、浏览历史、昵称、头像）均存储于您的设备本地沙箱，不与任何服务器同步。\n\n您有责任妥善保管设备安全。因设备丢失、损坏、恢复出厂设置或更换设备导致的本地数据丢失，由您自行承担。'
+                    },
+                    {
+                        heading: '四、用户行为规范',
+                        body: '在使用本应用期间，您承诺遵守以下规范，并明确禁止：\n\n【法律合规】不得利用本应用从事任何违反中华人民共和国法律法规的活动。\n【技术安全】不得对应用进行逆向工程、反编译、反汇编或以任何方式尝试获取源代码。\n【数据保护】不得恶意爬取、批量复制或商业化使用本地菜谱数据库内容。\n【服务完整性】不得采取任何可能损害应用正常运行的行为，包括但不限于模拟点击、自动化脚本等。\n\n违反上述规范，我们保留终止向您提供服务并追究相应责任的权利。'
+                    },
+                    {
+                        heading: '五、知识产权声明',
+                        body: '应用界面设计、交互逻辑、品牌标识及代码实现的全部知识产权归 孟晓菡 所有，受中华人民共和国著作权法保护。\n\n菜谱文字内容整理自公开烹饪知识；视频链接指向第三方平台创作者的原创作品，版权归原作者所有，本应用不主张所有权。\n\n您可将菜谱内容用于个人家庭烹饪参考，但不得将任何内容用于商业目的、公开传播或二次创作发行。'
+                    },
+                    {
+                        heading: '六、免责声明',
+                        body: '在法律允许的最大范围内，对于以下情形我们不承担任何责任：\n\n• 因个人体质差异、食物过敏、饮食禁忌引起的健康问题\n• 因食材质量、储存不当或烹饪操作失误引起的食品安全问题\n• 因第三方视频平台内容下架、变更或无法访问造成的体验影响\n• 因不可抗力（如自然灾害、网络故障、系统升级）导致的服务中断\n• 因设备故障或操作系统问题导致的数据丢失\n\n本应用提供的菜谱仅供参考，不构成医学、营养学或专业餐饮建议。有特殊饮食需求者请咨询专业医师或营养师。'
+                    },
+                    {
+                        heading: '七、服务变更与终止',
+                        body: '【我们的权利】作为持续迭代的学生开源项目，我们保留随时优化功能、调整界面、更新菜谱数据库及修改本地存储策略的权利。重大变更将提前通过应用内通知或版本更新日志告知。\n\n【您的权利】您可随时通过卸载本应用终止使用服务。卸载后，设备沙箱内的全部本地数据将由操作系统自动清除，无需额外操作。\n\n【我们的终止权】若您严重违反本协议，我们可在不另行通知的情况下暂停或终止向您提供服务。'
+                    },
+                    {
+                        heading: '八、协议的修改',
+                        body: '我们可能根据法律法规变化、功能迭代或运营需要对本协议进行修订。修订后的协议将在应用内显著位置公示，公示期不少于 7 日。\n\n公示期结束后，您继续使用本应用视为接受修订后的协议。若您不同意修订内容，应在公示期内停止使用并卸载本应用。'
+                    },
+                    {
+                        heading: '九、法律适用与争议解决',
+                        body: '本协议的订立、效力、解释、履行及争议解决均适用中华人民共和国法律。\n\n因本协议引发的任何争议，双方应首先通过友好协商解决；协商不成，任一方均可向开发者住所地（中国·南京）有管辖权的人民法院提起诉讼。'
+                    },
+                    {
+                        heading: '十、联系我们',
+                        body: '如您对本用户协议有任何疑问或需要行使相关权利：\n\n• GitHub Issues：https://github.com/Ruheluobixieqing/Cook.git\n• 孟晓菡'
+                    }
+                ],
+                footer: '© 2026 孟晓菡 保留所有权利'
+            };
+
+            // ─── DOM 引用 ──────────────────────────────────────────────
+            const rootEl = document.documentElement;
+            const navTitle = document.getElementById('navTitle');
+            const bannerIcon = document.getElementById('bannerIcon');
+            const bannerTitle = document.getElementById('bannerTitle');
+            const bannerDate = document.getElementById('bannerDate');
+            const bannerSubtitle = document.getElementById('bannerSubtitle');
+            const bannerIconBox = document.getElementById('bannerIconBox');
+            const sectionsContainer = document.getElementById('sectionsContainer');
+            const footerText = document.getElementById('footerText');
+            const footerSwitchLink = document.getElementById('footerSwitchLink');
+            const themeToggle = document.getElementById('themeToggle');
+            const navBackBtn = document.getElementById('navBackBtn');
+            const scrollArea = document.getElementById('scrollArea');
+            const scrollContent = document.getElementById('scrollContent');
+
+            // ─── 状态 ──────────────────────────────────────────────────
+            let currentDoc = PRIVACY_DOC;
+            let isDark = false;
+
+            // ─── 主题检测 ──────────────────────────────────────────────
+            function getSystemDark() {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+
+            function getStoredTheme() {
+                try {
+                    return localStorage.getItem('auv-legal-theme');
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            function setStoredTheme(theme) {
+                try {
+                    localStorage.setItem('auv-legal-theme', theme);
+                } catch (e) {
+                    // 忽略存储错误
+                }
+            }
+
+            function calcIsDark() {
+                const stored = getStoredTheme();
+                if (stored === 'dark') return true;
+                if (stored === 'light') return false;
+                return getSystemDark();
+            }
+
+            function applyTheme() {
+                isDark = calcIsDark();
+                if (isDark) {
+                    rootEl.classList.add('dark');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    rootEl.classList.remove('dark');
+                    themeToggle.textContent = '🌙';
+                }
+            }
+
+            function toggleTheme() {
+                const currentStored = getStoredTheme();
+                if (currentStored === 'dark') {
+                    setStoredTheme('light');
+                } else if (currentStored === 'light') {
+                    setStoredTheme(null); // 恢复系统默认
+                } else {
+                    // 当前是系统默认，根据系统状态切换
+                    if (getSystemDark()) {
+                        setStoredTheme('light');
+                    } else {
+                        setStoredTheme('dark');
+                    }
+                }
+                applyTheme();
+            }
+
+            // ─── 文档类型 class 切换 ────────────────────────────────────
+            function setDocClass(docType) {
+                rootEl.classList.remove('doc-privacy', 'doc-agreement');
+                if (docType === 'agreement') {
+                    rootEl.classList.add('doc-agreement');
+                } else {
+                    rootEl.classList.add('doc-privacy');
+                }
+            }
+
+            // ─── 渲染条款列表 ──────────────────────────────────────────
+            function renderSections(sections) {
+                sectionsContainer.innerHTML = '';
+                sections.forEach((section, index) => {
+                    const isLast = index === sections.length - 1;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'section-item';
+
+                    const innerDiv = document.createElement('div');
+                    innerDiv.className = 'section-inner';
+
+                    const headingRow = document.createElement('div');
+                    headingRow.className = 'section-heading-row';
+
+                    const accentBar = document.createElement('div');
+                    accentBar.className = 'section-accent-bar';
+
+                    const headingSpan = document.createElement('span');
+                    headingSpan.className = 'section-heading';
+                    headingSpan.textContent = section.heading;
+
+                    headingRow.appendChild(accentBar);
+                    headingRow.appendChild(headingSpan);
+
+                    const bodyP = document.createElement('p');
+                    bodyP.className = 'section-body';
+                    bodyP.textContent = section.body;
+
+                    innerDiv.appendChild(headingRow);
+                    innerDiv.appendChild(bodyP);
+                    itemDiv.appendChild(innerDiv);
+
+                    if (!isLast) {
+                        const divider = document.createElement('hr');
+                        divider.className = 'section-divider';
+                        itemDiv.appendChild(divider);
+                    }
+
+                    sectionsContainer.appendChild(itemDiv);
+                });
+            }
+
+            // ─── 更新页面内容 ──────────────────────────────────────────
+            function updatePageContent(doc, animate = false) {
+                currentDoc = doc;
+                setDocClass(doc.type);
+                navTitle.textContent = doc.title;
+                bannerIcon.textContent = doc.icon;
+                bannerTitle.textContent = doc.title;
+                bannerDate.textContent = doc.effectiveDate;
+                bannerSubtitle.textContent = doc.subtitle;
+                footerText.textContent = doc.footer;
+                renderSections(doc.sections);
+
+                // 更新切换链接文字
+                if (doc.type === 'privacy') {
+                    footerSwitchLink.textContent = '查看用户协议 →';
+                } else {
+                    footerSwitchLink.textContent = '查看隐私政策 →';
+                }
+
+                // 动画
+                if (animate) {
+                    scrollContent.classList.remove('content-pulse');
+                    void scrollContent.offsetWidth; // 强制回流
+                    scrollContent.classList.add('content-pulse');
+                    // 滚动到顶部
+                    scrollArea.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                // 更新URL参数（不刷新页面）
+                const url = new URL(window.location);
+                if (doc.type === 'agreement') {
+                    url.searchParams.set('doc', 'agreement');
+                } else {
+                    url.searchParams.delete('doc');
+                }
+                window.history.replaceState({}, '', url.toString());
+            }
+
+            // ─── 切换文档类型 ──────────────────────────────────────────
+            function switchDocument() {
+                const newDoc = currentDoc.type === 'privacy' ? AGREEMENT_DOC : PRIVACY_DOC;
+                updatePageContent(newDoc, true);
+            }
+
+            // ─── 返回处理 ──────────────────────────────────────────────
+            function handleBack() {
+                // 先尝试返回上一页
+                if (window.history.length > 1 && document.referrer) {
+                    window.history.back();
+                } else {
+                    // 没有历史记录，显示提示或跳转
+                    alert('没有上一页可返回。在实际应用中，此处会导航回设置页面。');
+                }
+            }
+
+            // ─── 初始化 ────────────────────────────────────────────────
+            function init() {
+                // 应用主题
+                applyTheme();
+
+                // 读取URL参数确定初始文档类型
+                const urlParams = new URLSearchParams(window.location.search);
+                const docParam = urlParams.get('doc');
+                const initialDoc = docParam === 'agreement' ? AGREEMENT_DOC : PRIVACY_DOC;
+
+                // 渲染初始内容
+                updatePageContent(initialDoc, false);
+
+                // 事件监听
+                themeToggle.addEventListener('click', toggleTheme);
+                footerSwitchLink.addEventListener('click', switchDocument);
+                navBackBtn.addEventListener('click', handleBack);
+
+                // 监听系统主题变化
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    const stored = getStoredTheme();
+                    if (stored === null) {
+                        applyTheme();
+                    }
+                });
+
+                // 键盘快捷键：按 Escape 返回
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        handleBack();
+                    }
+                });
+
+                console.log('📄 法律文档阅读页已就绪');
+                console.log('  当前文档:', initialDoc.title);
+                console.log('  主题模式:', isDark ? '深色' : '浅色');
+                console.log('  切换文档: 点击页脚链接');
+                console.log('  切换主题: 点击右下角按钮');
+                console.log('  返回: 点击左上角箭头或按 Esc 键');
+                console.log('  URL参数: ?doc=agreement 查看用户协议');
+            }
+
+            // ─── 启动 ──────────────────────────────────────────────────
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>
